@@ -13,6 +13,8 @@ Cada viga se analiza de la siguiente manera:
 - **Viga AB**: se analiza como viga empotrada en **a** y con voladizo en **b**.
 - **Viga BD**: se analiza como viga con voladizo en **b**, con rodillo en **c** y fija en **d**.
 
+![Figura 1. Esquema representativo de la viga combinada. En la parte superior se presenta un detalle simplificado de la junta de acoplamiento especial que se estudia.](image.png)
+
 ## Implementación
 
 El programa, desarrollado en Python, incluye:
