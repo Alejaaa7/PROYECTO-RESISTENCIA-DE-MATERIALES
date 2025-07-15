@@ -35,3 +35,12 @@ class VigaAB(Viga):
         yb1 = super().calcular_yb(EI, ya, theta_a, z1, Ma, A, p_Ma, p_a, p_w1, w1)
 
         return yb1
+    
+    def calcular_theta_b(self, ya, theta_a, z1, p_Ma, p_a, p_w1, w1):
+        EI = self.EI
+        A = self.A
+        Ma = self.Ma
+        
+        theta_b1 = super().calcular_theta_b(EI, ya, theta_a, z1, Ma, A, p_Ma, p_a, p_w1, w1)
+
+        return theta_b1

@@ -3,7 +3,7 @@
 from Vigas.viga import Viga 
 
 # La segunda viga: Viga BD, se analiza como viga con voladizo en b, con 
-# rodillo en C y fija en D:
+# rodillo en c y fija en d:
 
 class VigaBD(Viga):
     def __init__(self, lt2: float, w2: float):
@@ -41,3 +41,10 @@ class VigaBD(Viga):
         yb2 = super().calcular_yb(EI, yd, theta_d, z2, 0, C, 0, p_c, p_w2, w2)
 
         return yb2
+
+    def calcular_theta_b(self, yd, theta_d, z2, p_c, p_w2, w2):
+        EI = self.EI
+        C = self.C
+        theta_b2 = super().calcular_theta_b(EI, yd, theta_d, z2, 0, C, 0, p_c, p_w2, w2)
+
+        return theta_b2
