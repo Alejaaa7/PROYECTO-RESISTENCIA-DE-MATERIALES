@@ -64,6 +64,8 @@ Si desea, para una implementación más fácil y rápida, puede abrir este mismo
 
 [Abrir en Colab](https://colab.research.google.com/drive/1zl6dZ-tgf0FJcgcUkKOuioLuBHJm8iQ_?usp=sharing)
 
+*ojo: debe abrirlo desde una cuenta UNAL*
+
 
 Donde solo tiene que presionar el botón `Ejecutar todas`, dirigirse a la parte de abajo en la ventana donde le preguntarán qué valor de delta a desea.
 
