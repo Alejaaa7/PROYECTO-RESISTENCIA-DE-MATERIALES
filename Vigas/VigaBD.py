@@ -1,50 +1,50 @@
 # VigaBD.py
 
 from Vigas.viga import Viga 
+import math
 
 # La segunda viga: Viga BD, se analiza como viga con voladizo en b, con 
 # rodillo en c y fija en d:
 
 class VigaBD(Viga):
-    def __init__(self, lt2: float, w2: float):
-        super().__init__(lt2, w2)
+  def __init__(self, l2: float, l3: float, w2: float):
+    self.l2 = l2
+    self.l3 = l3
+    self.w2 = w2
 
-    def calcular_EI(self, E: float, Id: float):
-        self.EI = super().calcular_EI(E, Id)
+  def calcular_EI(self, E: float, Id: float):
+    self.EI = super().calcular_EI(E, Id)
+    return self.EI
 
-        return self.EI
-        
-    def sumatoria_de_M(self, w2: float, l2: float, l3: float):
-        # Primero se calcula la longitud total de los dos tramos, con los 
-        # datos dados:
-        lt2 = l2 + l3
+  def Análisis_Estático(self):
+    w2 = self.w2
+    l4 = self.l2 + self.l3
+    l3 = self.l3
 
-        # Se calculan las reacciones, siguiendo los sentidos del DCL, 
-        # haciendo sumatoria de momentos en d, para calcular C:
+    self.C = (w2 * (l4 ** 2)) / (2 * l3)
+    self.D = (w2 * l4) - self.C
 
-        self.C = (w2 * lt2 * lt2 / 2) / 3
+    return self.C, self.D
 
-        return self.C
+  def calcular_yb_thetab(self):
+    EI = self.EI
+    w2 = self.w2
+    C = self.C
+    D = self.D
+    l3 = self.l3
+    l2 = self.l2
+    l4 = l3 + l2
 
-    # Como ya se tiene C, es posible hacer la sumatoria de fuerzas en y, 
-    # nuevamente con sentido positivo hacia arriba:
-    def sumatoria_de_Fy(self, w2: float):
-        self.D = self.C - (w2 * 5)
+    theta_d = (1 / EI) * (((w2 * (l3 ** 4)) / 24) + ((D * (l3 ** 3)) / 6))
 
-        return self.D
-    
-    def calcular_yb(self, z2, yd, theta_d, w2, p_c, p_w2):
-        # p_a, p_Ma y p_w1 son los puntos de aplicación de las fuerzas
-    # y el inicio de w1:
-        EI = self.EI
-        C = self.C
-        yb2 = super().calcular_yb(EI, yd, theta_d, z2, 0, C, 0, p_c, p_w2, w2)
+    yb_2 = (1 / EI) * ((EI * theta_d * l4) + ((C * ((l4 - l3) ** 3)) / 6) - \
+     ((w2 * (l4 ** 4)) / 24) + ((D * (l4 ** 3)) / 6))
 
-        return yb2
+    yb2 = yb_2 * 1000
 
-    def calcular_theta_b(self, yd, theta_d, z2, p_c, p_w2, w2):
-        EI = self.EI
-        C = self.C
-        theta_b2 = super().calcular_theta_b(EI, yd, theta_d, z2, 0, C, 0, p_c, p_w2, w2)
+    thetab2 = (1 / EI) * ((EI * theta_d) + ((C * ((l4 - l3) ** 2)) / 2) + \
+     ((D * (l4 ** 2)) / 2) - ((w2 * (l4 ** 3)) / 6))
 
-        return theta_b2
+    theta_b2 = (thetab2 * 180) / math.pi
+
+    return yb2, theta_b2

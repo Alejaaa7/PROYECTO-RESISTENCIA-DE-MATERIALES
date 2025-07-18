@@ -1,0 +1,55 @@
+# analisis.py
+
+# se crea una clase que nos permita desarrollar todo lo pedido luego de 
+# determinar los yb:
+
+import sympy as sp
+
+# Variables desconocidas
+A, Ma, P, C, D, Y1, Y2 = sp.symbols('A Ma P C D Y1 Y2')
+
+# Constantes simbólicas
+l1, l2, l3, l4 = sp.symbols('l1 l2 l3 l4')
+w1, w2 = sp.symbols('w1 w2')
+E, Iizq, Ider, t, Yo = sp.symbols('E Iizq Ider t Yo')
+delta = sp.symbols('delta')
+
+# Diccionario de valores numéricos
+valores = {
+    l1: 4.0,
+    l2: 2.0,
+    l3: 3.0,
+    l4: 5.0,
+    w1: 44.75e3,
+    w2: 179e3,
+    E: 80e9,
+    Iizq: 1.33e-3,
+    Ider: 2.28e-3,
+    t: 0.0069921,
+    Yo: 0.00,
+    delta: 4e-3
+}
+
+# Sistema de ecuaciones con P en lugar de Ca
+eq1 = A*(l1**3)/6 - Ma*(l1**2)/2 - Y1*E*Iizq - w1*l1**4/24 + E*Iizq*Yo
+eq2 = D*(l4**3)/6 + C*(l2**3)/6 - Y2*E*Ider - w2*l4**4/24 + E*Ider*t*l4
+eq3 = A + P - w1*l1
+eq4 = Ma + P*l1 - w1*l1**2/2
+eq5 = D + C - P - w1*l4
+eq6 = P*l4 - C*l3 + w2*l4**2/2
+eq7 = Y2 - Y1 - delta  # Ecuación adicional
+
+# Sustituir valores numéricos
+ec_numericas = [eq.subs(valores) for eq in [eq1, eq2, eq3, eq4, eq5, eq6, eq7]]
+
+# Resolver sistema
+solucion = sp.solve(ec_numericas, (A, Ma, P, C, D, Y1, Y2), dict=True)
+
+# Mostrar resultados
+if solucion:
+    sol = solucion[0]
+    for var in [A, Ma, P, C, D, Y1, Y2]:
+        print(f"{var} = {sol[var]:.6f}")
+else:
+    print("No se encontró una solución.")
+
