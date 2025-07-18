@@ -58,6 +58,8 @@ El programa, desarrollado en Python, incluye:
 - generación y exportación de diagramas de cortante y momento flector.
 - exportación de resumenes de resultados en tablas.
 
+Además, en este respositorio se incluyen las gráficas y tablas para delta a = 0, como ejemplo. Si desea ver las demás implementaciones, corra el código y seleccione los otros valores posibles de delta a.
+
 Si desea, para una implementación más fácil y rápida, puede abrir este mismo proyeccto y ejecutarlo en Colab:
 
 [Abrir en Colab](https://colab.research.google.com/drive/1zl6dZ-tgf0FJcgcUkKOuioLuBHJm8iQ_?usp=sharing)
