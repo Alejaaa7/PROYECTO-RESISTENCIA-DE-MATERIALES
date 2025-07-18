@@ -4,9 +4,7 @@ Se presenta el programa, que permite dar respuesta a un problema de resistencia 
 
 ## Análisis
 
-Para el análisis de este problema, se opta por dividir la viga y analizar cada tramo por aparte, asumiendo que no hay contacto en **b**, se halla el desplazamiento en **b** para cada viga mediante la ecuación universal de la curva elástica, y se comparan los resultados.
-
-Si la diferencia entre los desplazamientos excede los límites de holgura establecidos por la junta (Δs hacia arriba o Δi hacia abajo), se comcluye que hay contacto en **b**. En ese caso, las dos vigas se comportan como una viga continua, y el análisis se replantea considerando la compatibilidad de deformaciones e inclinaciones en el punto de acoplamiento.
+Para el análisis de este problema, se opta por analizar cada tramo de la viga por aparte, asumiendo que no hay contacto en **b**, se halla el desplazamiento en **b** para cada viga mediante la ecuación universal de la curva elástica, y se presentan los resultados en la tabla resumen.
 
 Cada viga se analiza de la siguiente manera:
 
@@ -15,15 +13,56 @@ Cada viga se analiza de la siguiente manera:
 
 ![Figura 1. Esquema representativo de la viga combinada. En la parte superior se presenta un detalle simplificado de la junta de acoplamiento especial que se estudia.](image.jpg)
 
+Este análisis, permite añadir las fuerzas a acople a cada viga, por lo tanto, luego se vuelve a analizar cada viga, pero ahora teniendo en cuenta las fuerzas de acople, lo cual lleva a un sistema de ecuaciones 7x7. Como se analizan tres casos distintos de asentamiento en a, el sistema para los casos donde ya es 0, 10 y -10 mm es:
+
+
+$$
+1.\quad A\frac{l_1^3}{6} - M_a\frac{l_1^2}{2} - Y_1EI_{\text{izq}} = \frac{w_1 l_1^4}{24} - EI_{\text{izq}} Y_o
+$$
+
+$$
+2.\quad D\frac{l_4^3}{6} + C\frac{l_2^3}{6} - Y_2EI_{\text{der}} = \frac{w_2 l_4^4}{24} - EI_{\text{der}} t l_4
+$$
+
+$$
+3.\quad A + P = w_1 l_1
+$$
+
+$$
+4.\quad M_a + P l_1 = \frac{w_1 l_1^2}{2}
+$$
+
+$$
+5.\quad D + C - P = w_1 l_4
+$$
+
+$$
+6.\quad P l_4 - C l_3 = -\frac{w_2 l_4^2}{2}
+$$
+
+$$
+7.\quad Y_1 = Y_2 + \delta
+$$
+
+Luego de resolver este sistema, también usando código (su resolución se encuentra en los archivos `analisis_ya_0.py`, `analisis_ya_10.py` y `analisis_ya_-10.py`), ahora sí se tienen las reacciones de las vigas y es posible realizar las graficas de fuerza cortante y momento flector. Lo cual, finalmente cumple con los requisitos y objetivos del código: 
+- obtener las reacciones en los apoyos A, C y D y la reacción en el acoplamiento especial.
+- obtener los diagramas de fuerza cortante (V) y momento flector (Mf).
+- presentar una tabla resumen donde muestre los valores críticos de V y Mf, y su ubicación.
+- presentar una tabla resumen donde se muestre la deflexión, en milímetros, y la inclinación, en grados.
+
 ## Implementación
 
 El programa, desarrollado en Python, incluye:
 - cálculo de desplazamientos en **b** para ambas vigas.
-- verificación de contacto según holguras de la unión.
-- en caso de contacto, análisis completo de la viga continua.
-- cálculo de reacciones, diagramas de cortante y momento flector.
-- generación de gráficas de \( V(x) \) y \( M(x) \).
-- exportación opcional de resultados en tablas.
+- cálculo de reacciones mediantes resolución de sistema de ecuaciones
+- generación y exportación de diagramas de cortante y momento flector.
+- exportación de resumenes de resultados en tablas.
+
+Si desea, para una implementación más fácil y rápida, puede abrir este mismo proyeccto y ejecutarlo en Colab:
+
+[![Abrir en Colab]([https://colab.research.google.com/assets/colab-badge.svg](https://colab.research.google.com/drive/1zl6dZ-tgf0FJcgcUkKOuioLuBHJm8iQ_?usp=sharing))]
+
+Donde solo tiene que presionar el botón `Ejecutar todas`, dirigirse a la parte de abajo en la ventana donde le preguntarán qué valor de delta a desea.
 
 ## Requisitos
 
