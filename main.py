@@ -13,6 +13,9 @@ import json
 
 
 from Tablas_Graficas.tablas import generar_tabla
+from Tablas_Graficas.tablas_puntos_criticos import generar_tabla_delta1
+from Tablas_Graficas.tablas_puntos_criticos import generar_tabla_delta2
+from Tablas_Graficas.tablas_puntos_criticos import generar_tabla_delta3
 
 def main():
     print("Bienvenido, este código le permitirá desarrollar la viga combinada \
@@ -58,10 +61,13 @@ def main():
     generar_tabla()
     if delta_a == "0":
         exportar_graficas_delta1()
+        generar_tabla_delta1()
     elif delta_a == "10":
         exportar_graficas_delta2()
+        generar_tabla_delta2()
     elif delta_a == "-10":
         exportar_graficas_delta3()
+        generar_tabla_delta3()
     else:
         print("Error: Las gráficas solo serán generadas para los datos por defecto. Ingrese un valor válido (0, 10, -10). ")
 

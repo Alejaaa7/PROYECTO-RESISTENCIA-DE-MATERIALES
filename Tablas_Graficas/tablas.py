@@ -81,7 +81,7 @@ def generar_tabla():
             ha = "center", fontsize = 8, color = "gray")
 
     # GUARDAR PDF!
-    nombre = input("¿Cómo quiere guardar su tabla? (sin extensión): ").strip()
+    nombre = input("¿Cómo quiere guardar su tabla resumen de deflexión y pendiente?  (sin extensión): ").strip()
 
     # Asegurarse de que termine en ".pdf"
     if not nombre.lower().endswith(".pdf"):
