@@ -60,7 +60,8 @@ El programa, desarrollado en Python, incluye:
 
 Si desea, para una implementación más fácil y rápida, puede abrir este mismo proyeccto y ejecutarlo en Colab:
 
-[![Abrir en Colab]([https://colab.research.google.com/assets/colab-badge.svg](https://colab.research.google.com/drive/1zl6dZ-tgf0FJcgcUkKOuioLuBHJm8iQ_?usp=sharing))]
+[Abrir en Colab]([https://enlace.com](https://colab.research.google.com/drive/1zl6dZ-tgf0FJcgcUkKOuioLuBHJm8iQ_?usp=sharing))
+
 
 Donde solo tiene que presionar el botón `Ejecutar todas`, dirigirse a la parte de abajo en la ventana donde le preguntarán qué valor de delta a desea.
 
